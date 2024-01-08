@@ -1,15 +1,25 @@
 {
   "name": "lernamonorepo",
   "version": "0.0.0",
+  "workspaces": [
+    "projects/*"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "appParent": "ng serve appParent --port 4200",
+    "appOne": "ng serve appOne --port 4201",
+    "appTwo": "ng serve appTwo --port 4202",
+    "appThree": "ng serve appThree --port 4203",
+    "serveAll": "concurrently \"npm run appParent\" \"npm run appOne\" \"npm run appTwo\" \"npm run appThree\"",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
   "private": true,
   "dependencies": {
+    "@angular-architects/module-federation": "^17.0.1",
     "@angular/animations": "^17.0.0",
     "@angular/common": "^17.0.0",
     "@angular/compiler": "^17.0.0",
@@ -23,15 +33,19 @@
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^17.0.9",
     "@angular/cli": "^17.0.9",
     "@angular/compiler-cli": "^17.0.0",
     "@types/jasmine": "~5.1.0",
+    "concurrently": "^8.2.2",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "lerna": "^8.0.2",
+    "ngx-build-plus": "^17.0.0",
     "typescript": "~5.2.2"
   }
 }
